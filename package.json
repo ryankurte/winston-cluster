@@ -1,0 +1,28 @@
+{
+  "name": "winston-cluster",
+  "version": "0.0.1",
+  "description": "Winston transport for clustered services",
+  "main": "lib/winston-cluster.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryankurte/winston-cluster.git"
+  },
+  "keywords": [
+    "winston",
+    "cluster",
+    "transport"
+  ],
+  "author": "Ryan Kurte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryankurte/winston-cluster/issues"
+  },
+  "homepage": "https://github.com/ryankurte/winston-cluster#readme",
+  "dependencies": {
+    "mocha": "^2.2.5",
+    "winston": "^1.0.0"
+  }
+}
