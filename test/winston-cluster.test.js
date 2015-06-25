@@ -1,6 +1,8 @@
 var assert = require('assert');
 var winston = require('winston');
 
+var winstonCluster = require('../lib/winston-cluster');
+
 //Datastore testing
 describe('Winston Cluster Tests', function() {
 

@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- node
+install:
+- npm install
+script:
+- npm test
+deploy:
+  provider: npm
+  email: ryankurte@gmail.com
+  api_key:
+    secure: RIFEBU5DTWN1axj48JzVlL91EEEsV5M9aTVrEenUFoNeE4zb3MyEAPXrtut1OeEtf/vyfedOU+ioHNOJZ6sDsDBb0d+girLfZfmh0miId0Ug7KkyGNCPksaFWafVqIKGbFPCXWvIbDNBOgAgNwqoRYzPk9zsYtAN2LQ+pFoK2PDw+tIRgbD6DCf2BFlMezHSzA1wPBzYMn+aOKtPFDyl5YE+8a34nZAeEDifE+1OiuvWFPAxjqea5TlJVQQyxaWtIFLca9rldN/n5siScaa7RF0CmpbKaVMScrELIHU9Zr9TILom1vTUkEeBZZfWawEBrYN08zKUCbq9B0DUo1kpf+R2zGdKCMEpxwLIavfP4JHpuCcemoxWcEpnF9vLKhQGnZAZWSfII6liU+gaXZNsZWxfd1zQQwxe4H9/u5nVoOUDbUeQ/slcQkxuvK9Ir4IIQ1Zssv4zuwGNBtxwImaLnalJKux5WNpsBanfcSNgCkAqFGDr0lbdL5YI4T96W8UoejzmQol7oblinCTFFSAZJaAuh3MBRXzQelp4uaxeKCuzAaOj26u79N8s587ciEQ9SdXqYqZFyEGLrJetrL9fUAYBBsCIyqFQr4o5N7XG3cfb+/glSqhTChuWUyA8V+71Lc9PRncZAg+haKnJVKz7wP8TBTpYyNh8v3sukpcezr8=
+  on:
+    tags: true
+    repo: ryankurte/winston-cluster

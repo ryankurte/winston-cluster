@@ -43,6 +43,7 @@ if (cluster.isMaster) {
 ```
 
 ## TODO
- [ ] Write tests (check message passing works between threads)
- [ ] Refactor names of messages structures (maybe add a prototype)
- [ ] Allow bypass for other callbacks on non log messages
+ - [ ] Write tests (check message passing works between threads)
+ - [ ] Refactor names of messages structures (maybe add a prototype)
+ - [ ] Allow bypass for other callbacks on non log messages
+ 
