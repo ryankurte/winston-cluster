@@ -21,20 +21,23 @@ if (cluster.isMaster) {
         'filename': 'application.log'
     });
 
+    //Start workers
     var cpuCount = require('os').cpus().length;
-
     for (var i = 0; i < cpuCount; i++) {
         cluster.fork();
     }
 
+    //Bind logging listeners to workers
     winstonCluster.bindListeners();
  
 } else {
 	
+	//Replace default transport with cluster transport
 	winstonCluster.bindTransport();
 
     winston.info("Test Message!")
 
+    ...
 }
 
 ```
