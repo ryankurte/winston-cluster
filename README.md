@@ -33,6 +33,8 @@ if (cluster.isMaster) {
 
     //Bind logging listeners to workers
     winstonCluster.bindListeners();
+
+    ...
  
 } else {
 	
@@ -42,6 +44,7 @@ if (cluster.isMaster) {
     winston.info("Test Message!")
 
     ...
+    
 }
 
 ```
