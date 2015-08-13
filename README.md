@@ -10,12 +10,14 @@ Uses IPC to send log information from cluster workers to the master process for 
 ``` js
 
 var cluster = require('cluster');
+var winston = require('winston');
 var winstonCluster = require('winston-cluster');
- 
+
 if (cluster.isMaster) {
- 
-	//Setup logging here
-	winston.add(winston.transports.Console, {
+
+    //Setup logging here
+    winston.remove(winston.transports.Console);
+    winston.add(winston.transports.Console, {
         'timestamp': true,
         'colorize': true
     });
@@ -34,17 +36,19 @@ if (cluster.isMaster) {
     //Bind logging listeners to workers
     winstonCluster.bindListeners();
 
-    ...
- 
+    //Master logic here
+    //...
+
 } else {
-	
-	//Replace default transport with cluster transport
-	winstonCluster.bindTransport();
+
+    //Replace default transport with cluster transport
+    winstonCluster.bindTransport();
 
     winston.info("Test Message!")
 
-    ...
-    
+    //Slave logic here
+    //...
+
 }
 
 ```
