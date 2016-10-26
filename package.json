@@ -23,8 +23,8 @@
   "homepage": "https://github.com/ryankurte/winston-cluster#readme",
   "dependencies": {
     "cluster": "^0.7.7",
-    "mocha": "^3.0.2",
-    "promise": "^7.0.3",
+    "mocha": "^3.1.2",
+    "promise": "^7.1.1",
     "winston": "^2.2.0"
   }
 }
