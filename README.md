@@ -1,7 +1,7 @@
 # winston-cluster
 
 [![NPM Version](https://img.shields.io/npm/v/winston-cluster.svg)](https://www.npmjs.com/package/winston-cluster)
-[![Build Status](https://travis-ci.org/ryankurte/jfsm.svg)](https://travis-ci.org/ryankurte/jfsm)
+[![Build Status](https://travis-ci.org/ryankurte/winston-cluster.svg)](https://travis-ci.org/ryankurte/winston-cluster)
 [![Dependency Status](https://david-dm.org/ryankurte/winston-cluster.svg)](https://david-dm.org/ryankurte/winston-cluster)
 
 Winston transport for Node.js clustering.  
