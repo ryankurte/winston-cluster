@@ -1,13 +1,3 @@
-# winston-cluster
-
-[![Build Status](https://travis-ci.org/ryankurte/jfsm.svg)](https://travis-ci.org/ryankurte/jfsm)
-[![Dependency Status](https://david-dm.org/ryankurte/winston-cluster.svg)](https://david-dm.org/ryankurte/winston-cluster)
-
-Winston transport for Node.js clustering.  
-Uses IPC to send log information from cluster workers to the master process for file based or other single threaded logging.
-
-## Usage
-``` js
 #!/usr/bin/env node
 
 var cluster = require('cluster');
@@ -62,10 +52,3 @@ if (cluster.isMaster) {
     // ...
 
 }
-```
-
-## TODO
- - [ ] Write tests (check message passing works between threads)
- - [ ] Refactor names of messages structures (maybe add a prototype)
- - [ ] Allow bypass for other callbacks on non log messages
- 

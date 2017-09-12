@@ -3,15 +3,19 @@
 var cluster = require('cluster');
 var winston = require('winston');
 var winstonCluster = require('../lib/winston-cluster');
-
-winstonCluster.bindTransport();
+    
+var logger = new (winston.Logger)({transports: [
+    new (winston.transports.Cluster)({
+        level: 'info',
+    }),
+]})
 
 var run = exports.run = function() {
 	var i = 0;
 
 	process.on('message', function(message) {
 		if(message.cmd === 'log') {
-			winston.log(message.level, message.msg, message.meta, callback);
+			logger.log(message.level, message.msg, message.meta, callback);
 		} else if(message.cmd === 'shutdown') {
 			process.exit(0);
 		}
