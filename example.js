@@ -25,7 +25,7 @@ if (cluster.isMaster) {
     }
 
     // Bind event listeners to child threads using the local logger instance
-    winstonCluster.bindListeners(logger);
+    winstonCluster.bindListeners([ logger ]);
 
     // Logging works as normal in the main thread
     logger.info("Started server!")
