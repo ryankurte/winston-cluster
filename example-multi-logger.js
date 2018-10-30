@@ -1,14 +1,3 @@
-# winston-cluster
-
-[![NPM Version](https://img.shields.io/npm/v/winston-cluster.svg)](https://www.npmjs.com/package/winston-cluster)
-[![Build Status](https://travis-ci.org/ryankurte/winston-cluster.svg)](https://travis-ci.org/ryankurte/winston-cluster)
-[![Dependency Status](https://david-dm.org/ryankurte/winston-cluster.svg)](https://david-dm.org/ryankurte/winston-cluster)
-
-Winston transport for Node.js clustering.  
-Uses IPC to send log information from cluster workers to the master process for file based or other single threaded logging.
-
-## Usage
-``` js
 #!/usr/bin/env node
 
 var cluster = require('cluster');
@@ -19,13 +8,27 @@ var logLevel = 'info';
 
 if (cluster.isMaster) {
 
+    // For multiple logger instances, they should be provided names.  Those
+    // names need to be passed into the Cluster prototype, as well as the 
+    // binding.
+    var firstLoggerName = 'first-logger';
+    var secondLoggerName = 'second-logger';
+
     // Create parent thread logger
     // Other transports (ie. file writing) should be bound to this
-    var logger = new (winston.Logger)({
+    var firstLogger = new (winston.Logger)({
         transports: [
             new (winston.transports.Console)({
                 level: logLevel,
-            }),
+            }, firstLoggerName),
+        ]
+    });
+
+    var secondLogger = new (winston.Logger)({
+        transports: [
+            new (winston.transports.Console)({
+                level: logLevel,
+            }, secondLoggerName),
         ]
     });
 
@@ -36,7 +39,10 @@ if (cluster.isMaster) {
     }
 
     // Bind event listeners to child threads using the local logger instance
-    winstonCluster.bindListeners(logger);
+    winstonCluster.bindMultipleListeners([
+        { logger: firstLogger, loggerName: firstLoggerName },
+        { logger: secondLogger, loggerName: secondLoggerName}
+    ]);
 
     // Logging works as normal in the main thread
     logger.info("Started server!")
@@ -63,13 +69,3 @@ if (cluster.isMaster) {
     // ...
 
 }
-```
-
-## Binding Multiple Logger Instances
-See `example-multi-logger.js` for an example on binding multiple logger instances.
-
-## TODO
- - [ ] Write tests (check message passing works between threads)
- - [ ] Refactor names of messages structures (maybe add a prototype)
- - [ ] Allow bypass for other callbacks on non log messages
- 
