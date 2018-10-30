@@ -65,6 +65,9 @@ if (cluster.isMaster) {
 }
 ```
 
+## Binding Multiple Logger Instances
+See `example-multi-logger.js` for an example on binding multiple logger instances.
+
 ## TODO
  - [ ] Write tests (check message passing works between threads)
  - [ ] Refactor names of messages structures (maybe add a prototype)
