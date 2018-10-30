@@ -60,6 +60,7 @@ describe('Winston Cluster Tests', function() {
                 //Setup message
                 var message = {
                     cmd: 'log',
+                    loggerName: 'test-logger',
                     level: 'info',
                     msg: 'test message',
                     meta: {
@@ -70,6 +71,7 @@ describe('Winston Cluster Tests', function() {
                 //Bind handler
                 worker.on('message', function(msg) {
                     assert.equal(message.cmd, msg.cmd);
+                    assert.equal(message.loggerName, msg.loggerName);
                     assert.equal(message.level, msg.level);
                     assert.equal(message.msg, msg.msg);
                     assert.equal(message.meta.test, msg.meta.test);

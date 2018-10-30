@@ -7,7 +7,7 @@ var winstonCluster = require('../lib/winston-cluster');
 var logger = new (winston.Logger)({transports: [
     new (winston.transports.Cluster)({
         level: 'info',
-    }),
+    }, 'test-logger'),
 ]})
 
 var run = exports.run = function() {
