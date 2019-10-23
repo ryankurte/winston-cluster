@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
-var cluster = require('cluster');
 var winston = require('winston');
 var winstonCluster = require('../lib/winston-cluster');
     
-var logger = new (winston.Logger)({transports: [
-    new (winston.transports.Cluster)({
+var logger = winston.createLogger({transports: [
+    new winstonCluster({
         level: 'info',
     }, 'test-logger'),
 ]})
