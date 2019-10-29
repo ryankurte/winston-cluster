@@ -21,9 +21,9 @@ if (cluster.isMaster) {
 
     // Create parent thread logger
     // Other transports (ie. file writing) should be bound to this
-    var logger = new (winston.Logger)({
+    var logger = new winston.Logger({
         transports: [
-            new (winston.transports.Console)({
+            new winston.transports.Console({
                 level: logLevel,
             }),
         ]
@@ -36,6 +36,7 @@ if (cluster.isMaster) {
     }
 
     // Bind event listeners to child threads using the local logger instance
+    // has to be called after the child threads are started.
     winstonCluster.bindListeners(logger);
 
     // Logging works as normal in the main thread
@@ -49,8 +50,8 @@ if (cluster.isMaster) {
     // Create a new logger instance for the child thread using the cluster transport to
     // send data back to the parent thread.
     // Note that log level must also be set here to avoid filtering prior to sending logs back
-    var logger = new (winston.Logger)({transports: [
-        new (winston.transports.Cluster)({
+    var logger = winston.createLogger({transports: [
+        new winstonCluster({
             level: logLevel,
         }),
     ]})

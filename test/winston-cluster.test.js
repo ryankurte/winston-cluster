@@ -62,7 +62,7 @@ describe('Winston Cluster Tests', function() {
                     cmd: 'log',
                     loggerName: 'test-logger',
                     level: 'info',
-                    msg: 'test message',
+                    message: 'test message',
                     meta: {
                         test: 'wooo'
                     }
@@ -73,7 +73,7 @@ describe('Winston Cluster Tests', function() {
                     assert.equal(message.cmd, msg.cmd);
                     assert.equal(message.loggerName, msg.loggerName);
                     assert.equal(message.level, msg.level);
-                    assert.equal(message.msg, msg.msg);
+                    assert.equal(message.message, msg.msg);
                     assert.equal(message.meta.test, msg.meta.test);
 
                     //Remove handler

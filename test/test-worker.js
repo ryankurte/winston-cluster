@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
-var cluster = require('cluster');
 var winston = require('winston');
 var winstonCluster = require('../lib/winston-cluster');
     
-var logger = new (winston.Logger)({transports: [
-    new (winston.transports.Cluster)({
+var logger = winston.createLogger({transports: [
+    new winstonCluster({
         level: 'info',
     }, 'test-logger'),
 ]})
@@ -15,7 +14,7 @@ var run = exports.run = function() {
 
 	process.on('message', function(message) {
 		if(message.cmd === 'log') {
-			logger.log(message.level, message.msg, message.meta, callback);
+			logger.log(message.level, message.message, message.meta, callback);
 		} else if(message.cmd === 'shutdown') {
 			process.exit(0);
 		}

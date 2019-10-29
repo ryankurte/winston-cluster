@@ -1,6 +1,6 @@
 {
   "name": "winston-cluster",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Winston transport for clustered services",
   "main": "lib/winston-cluster.js",
   "scripts": {
@@ -24,7 +24,8 @@
   "dependencies": {
     "cluster": "^0.7.7",
     "promise": "^8.0.1",
-    "winston": "^2.2.0"
+    "winston": "^3.2.1",
+    "winston-transport": "^4.3.0"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
