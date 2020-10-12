@@ -1,6 +1,6 @@
 {
   "name": "winston-cluster",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Winston transport for clustered services",
   "main": "lib/winston-cluster.js",
   "scripts": {
