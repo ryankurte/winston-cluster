@@ -9,8 +9,8 @@ declare namespace winstonCluster {
     loggerName: string;
 
     bindListeners(instance: any): void;
-    bindListeners(worker: cluster.Worker, instance: any): void;
-    bindMultipleListeners(instanes: any[]): void;
+    bindListener(worker: cluster.Worker, instance: any): void;
+    bindMultipleListeners(instances: any[]): void;
     log(info: any, callback: Function): void;
 
     new(opts: transportStream.TransportStreamOptions, loggerName?: string): Cluster;
