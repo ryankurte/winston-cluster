@@ -1,5 +1,6 @@
 import * as transportStream from 'winston-transport';
 import * as cluster from 'cluster';
+import * as winston from 'winston';
 
 declare namespace winstonCluster {
   interface Cluster extends transportStream {
