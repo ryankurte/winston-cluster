@@ -1,13 +1,8 @@
 var assert = require('assert');
-var promise = require('promise');
-var winston = require('winston');
 var os = require('os');
 var cluster = require('cluster');
 
-var winstonCluster = require('../lib/winston-cluster');
-
 //TODO: how to test with clustering ..?
-
 //Datastore testing
 describe('Winston Cluster Tests', function() {
 
@@ -41,7 +36,7 @@ describe('Winston Cluster Tests', function() {
     });
 
     it("is cluster master", function(done) {
-        assert.equal(true, cluster.isMaster);
+        assert.strictEqual(true, cluster.isMaster);
         done();
     });
 
@@ -49,13 +44,13 @@ describe('Winston Cluster Tests', function() {
         done();
     });
 
-    it("can send log events from slave to master", function(done) {
+    it("can send log events from worker to manager", function(done) {
         var promises = [];
 
         for (var id in cluster.workers) {
             var worker = cluster.workers[id];
 
-            var p = new promise(function(resolve, reject) {
+            var p = new Promise(function(resolve, reject) {
 
                 //Setup message
                 var message = {
@@ -70,11 +65,11 @@ describe('Winston Cluster Tests', function() {
 
                 //Bind handler
                 worker.on('message', function(msg) {
-                    assert.equal(message.cmd, msg.cmd);
-                    assert.equal(message.loggerName, msg.loggerName);
-                    assert.equal(message.level, msg.level);
-                    assert.equal(message.message, msg.msg);
-                    assert.equal(message.meta.test, msg.meta.test);
+                    assert.strictEqual(message.cmd, msg.cmd, "message.cmd != msg.cmd");
+                    assert.strictEqual(message.loggerName, msg.loggerName, "message.loggerName != msg.loggerName");
+                    assert.strictEqual(message.level, msg.level, "message.level != msg.level");
+                    assert.strictEqual(message.message, msg.msg, "message.message != msg.msg");
+                    assert.strictEqual(message.meta.test, msg.meta.test, "message.meta.test != msg.meta.test");
 
                     //Remove handler
                     worker.on('message', function(msg) {});
@@ -89,7 +84,7 @@ describe('Winston Cluster Tests', function() {
             promises.push(p);
         }
 
-        promise.all(promises)
+        Promise.all(promises)
             .then(function() {
                 done();
             });
