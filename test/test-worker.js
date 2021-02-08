@@ -14,7 +14,8 @@ var run = exports.run = function() {
 
 	process.on('message', function(message) {
 		if(message.cmd === 'log') {
-			logger.log(message.level, message.message, message.meta, callback);
+			logger.log(message.level, message.message, message.meta)
+				.then(callback);
 		} else if(message.cmd === 'shutdown') {
 			process.exit(0);
 		}
