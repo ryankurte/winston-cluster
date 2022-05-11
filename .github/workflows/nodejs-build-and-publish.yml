@@ -37,6 +37,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/
+          scope: ryankurte/${{ github.repository.name }}
       - run: npm run
       - run: npm publish
         env:
@@ -58,7 +59,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://npm.pkg.github.com/
-          scope: ${{ github.repository.owner }}
+          scope: ${{ github.repository.owner }}/${{ github.repository.name }}
       - run: npm run
       - run: npm publish
         env:
