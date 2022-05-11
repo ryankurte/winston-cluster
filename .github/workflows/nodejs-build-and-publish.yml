@@ -4,8 +4,10 @@
 name: Node.js Build & Publish
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   build:
@@ -27,6 +29,7 @@ jobs:
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request }}
     strategy:
       matrix:
         include:
@@ -45,6 +48,7 @@ jobs:
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request }}
     strategy:
       matrix:
         include:
