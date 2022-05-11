@@ -25,7 +25,7 @@ jobs:
       - run: npm run test
 
   publish-npm:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     if: ${{ !github.event.pull_request }}
     strategy:
@@ -43,7 +43,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   publish-gpr:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     if: ${{ !github.event.pull_request }}
     strategy:
