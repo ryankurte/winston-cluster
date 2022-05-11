@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - node-version: [12.x, 14.x, 16.x]
+          - node-version: [12, 14, 16]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -33,7 +33,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - node-version: [12.x, 14.x, 16.x]
+          - node-version: [12, 14, 16]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -52,7 +52,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - node-version: [12.x, 14.x, 16.x]
+          - node-version: [12, 14, 16]
     permissions:
       contents: read
       packages: write
