@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Node.js Package NpmJs
+name: Node.js Build & Publish
 
 on:
   release:
@@ -10,13 +10,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - node-version: [12.x, 14.x, 16.x]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - run: npm ci
-      - run: npm test
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - run: yarn ci
+      - run: yarn run build --if-present
+      - run: yarn test
 
   publish-npm:
     needs: build
@@ -24,33 +30,25 @@ jobs:
     strategy:
       matrix:
         include:
-          - node-version:
-            - 10
-            - 12
-            - 14
-            - 16
+          - node-version: [12.x, 14.x, 16.x]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish
+      - run: yarn ci
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-  
+
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
-          - node-version:
-            - 10
-            - 12
-            - 14
-            - 16
+          - node-version: [12.x, 14.x, 16.x]
     permissions:
       contents: read
       packages: write
@@ -64,4 +62,3 @@ jobs:
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-  
