@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'yarn'
       - run: npm ci
       - run: npm run test
 
@@ -28,15 +28,13 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: ${{ !github.event.pull_request }}
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: https://registry.npmjs.org/
+          node-version: '16.x'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org/'
           scope: '@${{ github.repository.owner }}'
       - run: npm run
       - run: npm publish
@@ -47,18 +45,16 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: ${{ !github.event.pull_request }}
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
     permissions:
       contents: read
       packages: write
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: https://npm.pkg.github.com/
+          node-version: '16.x'
+          cache: 'yarn'
+          registry-url: 'https://npm.pkg.github.com/'
           scope: '@${{ github.repository.owner }}'
       - run: npm run
       - run: npm publish
