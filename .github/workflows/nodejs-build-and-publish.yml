@@ -21,8 +21,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - run: npm ci
-      - run: npm run test
+      - run: yarn
+      - run: yarn test
 
   publish-npm:
     needs: test
@@ -36,7 +36,7 @@ jobs:
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org/'
           scope: '@${{ github.repository.owner }}'
-      - run: npm run
-      - run: npm publish
+      - run: yarn
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
